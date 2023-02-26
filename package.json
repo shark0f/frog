@@ -1,0 +1,32 @@
+{
+	"name": "@shark0f/frog",
+	"version": "0.1.0",
+	"description": "The shark0.com SDK for Node.js.",
+	"keywords": [
+		"shark0"
+	],
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "tsc",
+		"test": "vitest run",
+		"prepublishOnly": "npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/shark0f/frog.git"
+	},
+	"author": "shark0",
+	"license": "GPLv3",
+	"bugs": {
+		"url": "https://github.com/shark0f/frog/issues"
+	},
+	"homepage": "https://github.com/shark0f/frog#readme",
+	"devDependencies": {
+		"typescript": "^4.7.4",
+		"vitest": "^0.17.0"
+	},
+	"dependencies": {
+		"@shark0f/fish": "^0.1.1",
+		"node-fetch": "2.6.7"
+	}
+}
