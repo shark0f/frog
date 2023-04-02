@@ -18,9 +18,9 @@ interface FrogAreaConfig extends Pick<FrogConfig, 'apiKey'> {
 }
 
 export enum LogType {
-	Info = 0,
-	Warning = 1,
-	Error = 2,
+	Info = 'INFO',
+	Warning = 'WARNING',
+	Error = 'ERROR',
 }
 
 export const API_URL = 'https://27363.shark0.com/';
