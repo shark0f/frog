@@ -1,6 +1,6 @@
-import { test, vi, expect } from 'vitest';
 import * as fetchModule from 'node-fetch';
-import { Frog, LogType, API_URL } from './index';
+import { expect, test, vi } from 'vitest';
+import { API_URL, Frog, LogType } from './index';
 
 vi.mock('node-fetch', () => {
 	return {
