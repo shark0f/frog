@@ -1,7 +1,7 @@
 import { Fish } from '@shark0f/fish';
 import fetch from 'node-fetch';
 
-export interface FrogConfig {
+export interface ProjectConfig {
 	/**
 	 * The key used to identify your project.
 	 * You can find this key in the project settings.
@@ -13,7 +13,7 @@ export interface FrogConfig {
 	password: string;
 }
 
-interface FrogAreaConfig extends Pick<FrogConfig, 'apiKey'> {
+interface ProjectAreaConfig extends Pick<ProjectConfig, 'apiKey'> {
 	fish: Fish;
 }
 
@@ -25,11 +25,11 @@ export enum LogType {
 
 export const API_URL = 'https://27363.shark0.com/';
 
-class FrogArea {
-	private readonly config: FrogAreaConfig;
+class ProjectArea {
+	private readonly config: ProjectAreaConfig;
 	private readonly areaName: string;
 
-	constructor(config: FrogAreaConfig, areaName: string) {
+	constructor(config: ProjectAreaConfig, areaName: string) {
 		this.config = config;
 		this.areaName = areaName;
 	}
@@ -102,34 +102,34 @@ class FrogArea {
 /**
  * @example
  * ```typescript
- * const frog = new Frog({ secret: 'abc...', apiKey: 'abc...' });
- * const log = new frog.Area('sign-up');
+ * const project = new Project({ secret: 'abc...', apiKey: 'abc...' });
+ * const log = new project.Area('sign-up');
  * ```
  */
-export class Frog {
-	private readonly config: FrogConfig;
+export class Project {
+	private readonly config: ProjectConfig;
 	private readonly fish: Fish;
 
 	/**
 	 * @example
 	 * ```typescript
-	 * const frog = new Frog(...);
-	 * const log = new frog.Area('sign-up');
+	 * const project = new Project(...);
+	 * const log = new project.Area('sign-up');
 	 * ```
 	 */
 	public Area: {
-		new (areaName: string): FrogArea;
+		new (areaName: string): ProjectArea;
 	};
 
-	constructor(config: FrogConfig) {
+	constructor(config: ProjectConfig) {
 		this.config = config;
 		this.fish = new Fish(config.password);
 
-		this.Area = FrogArea.bind(this, {
+		this.Area = ProjectArea.bind(this, {
 			fish: this.fish,
 			apiKey: this.config.apiKey,
 		}) as {
-			new (areaName: string): FrogArea;
+			new (areaName: string): ProjectArea;
 		};
 	}
 }

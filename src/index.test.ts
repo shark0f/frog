@@ -1,6 +1,6 @@
 import * as fetchModule from 'node-fetch';
 import { expect, test, vi } from 'vitest';
-import { API_URL, Frog, LogType } from './index';
+import { API_URL, LogType, Project } from './index';
 
 vi.mock('node-fetch', () => {
 	return {
@@ -11,10 +11,10 @@ const fetchSpy = vi.spyOn(fetchModule, 'default');
 
 const API_KEY = 'abc';
 
-const frog = new Frog({ apiKey: API_KEY, password: 'abc' });
+const project = new Project({ apiKey: API_KEY, password: 'abc' });
 
 test('info', () => {
-	const log = new frog.Area('test');
+	const log = new project.Area('test');
 	log.info('test');
 
 	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {
@@ -31,7 +31,7 @@ test('info', () => {
 });
 
 test('warning', () => {
-	const log = new frog.Area('test');
+	const log = new project.Area('test');
 	log.warning('test');
 
 	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {
@@ -48,7 +48,7 @@ test('warning', () => {
 });
 
 test('error', () => {
-	const log = new frog.Area('test');
+	const log = new project.Area('test');
 	log.error('test');
 
 	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {
@@ -65,7 +65,7 @@ test('error', () => {
 });
 
 test('different areas', () => {
-	const log = new frog.Area('test');
+	const log = new project.Area('test');
 	log.info('test');
 
 	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {
@@ -80,7 +80,7 @@ test('different areas', () => {
 		}),
 	});
 
-	const log2 = new frog.Area('test2');
+	const log2 = new project.Area('test2');
 	log2.info('test');
 
 	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {

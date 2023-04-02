@@ -13,8 +13,8 @@ The shark0.com SDK for Node.js.
  * password: string;
  * The password used for the encryption.
  */
-const frog = new Frog({ apiKey: 'abc...', password: 'abc...' });
-const log = new frog.Area('sign_up');
+const project = new Project({ apiKey: 'abc...', password: 'abc...' });
+const log = new project.Area('sign_up');
 
 try {
 	await insertUserIntoDatabase(user);
