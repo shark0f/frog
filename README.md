@@ -14,7 +14,7 @@ The shark0.com SDK for Node.js.
  * The password used for the encryption.
  */
 const project = new Project({ apiKey: 'abc...', password: 'abc...' });
-const log = new project.Area('sign_up');
+const log = new project.logs.Area('sign_up');
 
 try {
 	await insertUserIntoDatabase(user);

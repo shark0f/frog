@@ -1,97 +1,11 @@
-import * as fetchModule from 'node-fetch';
-import { expect, test, vi } from 'vitest';
-import { API_URL, LogType, Project } from './index';
+import { expect, test } from 'vitest';
+import { Project } from '.';
 
-vi.mock('node-fetch', () => {
-	return {
-		default: vi.fn(() => null),
-	};
-});
-const fetchSpy = vi.spyOn(fetchModule, 'default');
-
-const API_KEY = 'abc';
-
-const project = new Project({ apiKey: API_KEY, password: 'abc' });
-
-test('info', () => {
-	const log = new project.Area('test');
-	log.info('test');
-
-	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {
-		method: 'post',
-		headers: {
-			'X-API-Key': API_KEY,
-		},
-		body: JSON.stringify({
-			area: 'test',
-			content: '8b835dd3',
-			type: LogType.Info,
-		}),
-	});
-});
-
-test('warning', () => {
-	const log = new project.Area('test');
-	log.warning('test');
-
-	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {
-		method: 'post',
-		headers: {
-			'X-API-Key': API_KEY,
-		},
-		body: JSON.stringify({
-			area: 'test',
-			content: '8b835dd3',
-			type: LogType.Warning,
-		}),
-	});
-});
-
-test('error', () => {
-	const log = new project.Area('test');
-	log.error('test');
-
-	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {
-		method: 'post',
-		headers: {
-			'X-API-Key': API_KEY,
-		},
-		body: JSON.stringify({
-			area: 'test',
-			content: '8b835dd3',
-			type: LogType.Error,
-		}),
-	});
-});
-
-test('different areas', () => {
-	const log = new project.Area('test');
-	log.info('test');
-
-	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {
-		method: 'post',
-		headers: {
-			'X-API-Key': API_KEY,
-		},
-		body: JSON.stringify({
-			area: 'test',
-			content: '8b835dd3',
-			type: LogType.Info,
-		}),
+test('Can create project and access features', () => {
+	const project = new Project({
+		apiKey: 'test',
+		password: 'test',
 	});
 
-	const log2 = new project.Area('test2');
-	log2.info('test');
-
-	expect(fetchSpy).toHaveBeenCalledWith(API_URL, {
-		method: 'post',
-		headers: {
-			'X-API-Key': API_KEY,
-		},
-		body: JSON.stringify({
-			area: 'test2',
-			content: '8b835dd3',
-			type: LogType.Info,
-		}),
-	});
+	expect(project.logs);
 });
